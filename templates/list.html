@@ -1,0 +1,22 @@
+<div class="jumbotron text-center">
+	<h1>History</h1>	
+</div>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Location</th>
+			<th>Value Units</th>
+			<th>Edit</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="beer in beers">
+			<td>{{beer.Name}}</td>
+			<td>{{beer.Location}}</td>
+			<td><strong>{{(beer.percentAlcohol * beer.ounces) / beer.price}}</strong></td>
+			<td><a href="#/edit/{{beer.$id}}">Edit</a></td>
+		</tr>
+	</tbody>
+</table>
+

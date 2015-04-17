@@ -1,0 +1,42 @@
+<div class="jumbotron text-center">
+	<h1>Calculator</h1>	
+</div>
+<div class="panel panel-info">
+	<div class="panel-body">
+		<div class="form">
+			<div class="form-group">
+				<label>% Alcohol</label>						
+				<input class="form-control" type="number" ng-model="percentAlcohol"/>					
+			</div>
+			<div class="form-group">
+				<label>Ounces</label>						
+				<input class="form-control" type="number" ng-model="ounces"/>					
+			</div>
+			<div class="form-group">
+				<label>Price</label>						
+				<input class="form-control" type="number" ng-model="price"/>					
+			</div>
+			<div class="form-group">
+				<strong>Beer Value Units : {{(percentAlcohol * ounces) / price}} </strong>
+			</div>
+			<div class="form-group" ng-hide="showSave">
+				<button ng-click="showSave = true" >Add Info</button>
+				<button ng-click="clear()" ng-hide="showSave">Clear</button>
+			</div>
+			<div ng-show="showSave">
+				<div class="form-group">
+					<label>Name</label>						
+					<input class="form-control" type="text" ng-model="name"/>					
+				</div>
+				<div class="form-group">
+					<label>Location</label>						
+					<input class="form-control" type="text" ng-model="location"/>					
+				</div>
+				<button ng-click="saveBeer()">Save</button>
+				<button ng-click="clear(); showSave = false;">Clear</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+	

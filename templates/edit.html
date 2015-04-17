@@ -1,0 +1,33 @@
+<div class="jumbotron text-center">
+	<h1>Edit</h1>	
+</div>
+<div class="panel panel-info">
+	<div class="panel-body">
+		<div class="form">
+			<div class="form-group">
+				<label>% Alcohol</label>						
+				<input class="form-control" type="number" ng-model="beer.percentAlcohol"/>					
+			</div>
+			<div class="form-group">
+				<label>Ounces</label>						
+				<input class="form-control" type="number" ng-model="beer.ounces"/>					
+			</div>
+			<div class="form-group">
+				<label>Price</label>						
+				<input class="form-control" type="number" ng-model="beer.price"/>					
+			</div>
+			<div class="form-group">
+				<label>Name</label>						
+				<input class="form-control" type="text" ng-model="beer.Name"/>					
+			</div>
+			<div class="form-group">
+				<label>Location</label>						
+				<input class="form-control" type="text" ng-model="beer.Location"/>					
+			</div>
+			<div class="form-group">
+				<button ng-click="delete()">Delete</button>
+			</div>
+		</div>
+
+	</div>
+</div>

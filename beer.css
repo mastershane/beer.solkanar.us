@@ -1,0 +1,9 @@
+input[type='text'],
+input[type='number'],
+textarea {
+  font-size: 16px;
+}
+
+body { 
+    padding-top: 65px; 
+}
