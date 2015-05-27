@@ -7,7 +7,7 @@
 			<th>Name</th>
 			<th>Location</th>
 			<th>Value Units</th>
-			<th>Edit</th>
+			<th ng-show="showEdit">Edit</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -15,7 +15,7 @@
 			<td>{{beer.Name}}</td>
 			<td>{{beer.Location}}</td>
 			<td><strong>{{(beer.percentAlcohol * beer.ounces) / beer.price}}</strong></td>
-			<td><a href="#/edit/{{beer.$id}}">Edit</a></td>
+			<td ng-show="showEdit"><a href="#/edit/{{beer.$id}}">Edit</a></td>
 		</tr>
 	</tbody>
 </table>

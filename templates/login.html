@@ -1,0 +1,30 @@
+<div class="jumbotron text-center">
+	<h1>Login</h1>	
+</div>
+<div class="panel panel-info">
+	<div class="panel-body">
+		<div class="form">
+			<div class="form-group">
+				<strong>Login with email</strong>
+			</div>
+			<div class="form-group">
+				<label>email</label>						
+				<input class="form-control" type="text" ng-model="email"/>					
+			</div>
+			<div class="form-group">
+				<label>password</label>						
+				<input class="form-control" type="text" ng-model="password"/>					
+			</div>
+			<div class="form-group">
+				<button ng-click="Login()" >Login</button>
+				<button ng-click="CreateNewUser()">Create New User</button>
+			</div>
+			<div class="form-group">
+				<p ng-if="message">Message: <strong>{{ message }}</strong></p>
+				<p ng-if="error">Error: <strong>{{ error }}</strong></p>
+			</div>
+
+		</div>
+
+	</div>
+</div>

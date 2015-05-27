@@ -17,10 +17,17 @@ app.config(['$routeProvider',function($routeProvider) {
 		.when("/edit/:id",{
 			templateUrl : 'templates/edit.html',
 			controller : 'editController'
+		})
+		.when("/login",{
+			templateUrl : 'templates/login.html',
+			controller : 'loginController'
 		});
 }]);
 
-app.controller("calculatorController", ["$scope", "$firebase", function($scope, $firebase){
+app.controller("calculatorController", ["$scope", "$firebase","Auth", function($scope, $firebase, Auth){
+
+	$scope.User = Auth.$getAuth();
+	$scope.isAuthenticated = ($scope.User) ? true: false;
 
 	var ref = new Firebase("https://beer-sol-kanar.firebaseio.com/beers");	
 	var sync = $firebase(ref);
@@ -30,7 +37,8 @@ app.controller("calculatorController", ["$scope", "$firebase", function($scope, 
 			Location : $scope.location,
 			percentAlcohol : $scope.percentAlcohol,
 			ounces : $scope.ounces,
-			price : $scope.price
+			price : $scope.price,
+			creator : $scope.User.uid
 		}
 		sync.$push(beer)
 	}
@@ -43,9 +51,18 @@ app.controller("calculatorController", ["$scope", "$firebase", function($scope, 
 	}
 }]);
 
-app.controller('listController', ["$scope", "$firebase", function($scope, $firebase){
+app.factory("Auth", ["$firebaseAuth",
+  function($firebaseAuth) {
+    var ref = new Firebase("https://beer-sol-kanar.firebaseio.com/");
+    return $firebaseAuth(ref);
+  }
+]);
+
+app.controller('listController', ["$scope", "$firebase", "Auth", function($scope, $firebase, Auth){
 	var ref = new Firebase("https://beer-sol-kanar.firebaseio.com/beers");
     var sync = $firebase(ref);
+
+    $scope.showEdit = (Auth.$getAuth()) ? true: false;
     $scope.beers = sync.$asArray();
 }])
 
@@ -60,4 +77,38 @@ app.controller('editController', ['$scope',"$firebase", '$routeParams', '$locati
 		sync.$remove();
 		$location.path("/list");
 	};
+}])
+app.controller('loginController', ["$scope", "Auth", function($scope, Auth){
+
+	if(Auth.$getAuth()){
+		Auth.$unauth();
+	}
+
+	$scope.CreateNewUser = function() {
+		$scope.message = null;
+		$scope.error = null;
+
+		Auth.$createUser({
+			email: $scope.email,
+			password: $scope.password
+		}).then(function(userData) {
+			$scope.message = "User created with uid: " + userData.uid;
+		}).catch(function(error) {
+			$scope.error = error;
+		});
+	};
+
+	$scope.Login = function(){
+		$scope.message = null;
+		$scope.error = null;
+
+		Auth.$authWithPassword({
+			email: $scope.email,
+			password: $scope.password
+		}).then(function(authData) {
+			$scope.message = "Logged in as:" + authData.uid;
+		}).catch(function(error) {
+			$scope.error = error;
+		});
+	}
 }])

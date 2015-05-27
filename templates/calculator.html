@@ -20,7 +20,7 @@
 				<strong>Beer Value Units : {{(percentAlcohol * ounces) / price}} </strong>
 			</div>
 			<div class="form-group" ng-hide="showSave">
-				<button ng-click="showSave = true" >Add Info</button>
+				<button ng-show="isAuthenticated" ng-click="showSave = true" >Add Info</button>
 				<button ng-click="clear()" ng-hide="showSave">Clear</button>
 			</div>
 			<div ng-show="showSave">
