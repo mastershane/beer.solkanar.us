@@ -5,5 +5,12 @@ textarea {
 }
 
 body { 
-    padding-top: 65px; 
+	padding-top: 65px; 
+}
+
+.sortorder:after {
+	content: '\25b2';
+}
+.sortorder.reverse:after {
+	content: '\25bc';
 }

@@ -40,7 +40,7 @@ app.controller("calculatorController", ["$scope", "$firebase","Auth", function($
 			price : $scope.price,
 			creator : $scope.User.uid
 		}
-		sync.$push(beer)
+		sync.$push(beer);
 	}
 	$scope.clear = function(){
 		$scope.name = null;
@@ -60,7 +60,19 @@ app.factory("Auth", ["$firebaseAuth",
 
 app.controller('listController', ["$scope", "$firebase", "Auth", function($scope, $firebase, Auth){
 	var ref = new Firebase("https://beer-sol-kanar.firebaseio.com/beers");
-    var sync = $firebase(ref);
+	var sync = $firebase(ref);
+
+	$scope.sortValue = 'Name';
+	$scope.reverse = false;
+
+	$scope.getBeerValue = function (beer) { return (beer.percentAlcohol * beer.ounces) / beer.price; }
+
+	$scope.order = function(sortValue) {
+		if (sortValue == $scope.sortValue) {
+			$scope.reverse = !$scope.reverse;
+		}
+		$scope.sortValue = sortValue;
+	}
 
     $scope.showEdit = (Auth.$getAuth()) ? true: false;
     $scope.beers = sync.$asArray();
