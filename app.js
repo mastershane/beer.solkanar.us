@@ -78,8 +78,6 @@ app.controller('listController', ["$scope", "$firebase", "Auth", function($scope
 	$scope.sortValue = 'Name';
 	$scope.reverse = false;
 
-	$scope.getBeerValue = function (beer) { return (beer.percentAlcohol * beer.ounces) / beer.price; }
-
 	$scope.order = function (sortValue) {
 	    if (sortValue == $scope.sortValue) {
 	        $scope.reverse = !$scope.reverse;
