@@ -1,0 +1,26 @@
+﻿<div class="jumbotron text-center">
+	<h1>Profile</h1>	
+</div>
+<div class="panel panel-info">
+	<div class="panel-body">
+        <p ng-show="message">{{message}}</p>
+		<div class="form" ng-show="userProfile">
+			<div class="form-group">
+				<label>Name</label>						
+				<input class="form-control" type="text" ng-model="userProfile.Name"/>					
+			</div>
+			<div class="form-group">
+				<label>Location</label>						
+				<input class="form-control" type="text" ng-model="userProfile.Location"/>					
+			</div>
+			<div class="form-group">
+				<label>Favorite Beer</label>						
+				<input class="form-control" type="text" ng-model="userProfile.FavoriteBeer"/>					
+			</div>
+			<div class="form-group">
+				<label>Bio</label>						
+				<textarea class="form-control" ng-model="userProfile.Bio"/>					
+			</div>
+		</div>
+	</div>
+</div>
