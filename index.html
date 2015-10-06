@@ -1,4 +1,4 @@
-<html ng-app="beerApp">
+﻿<html ng-app="beerApp">
 	<head>
         <title>Beer.SolKanar.us</title>
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,12 +35,14 @@
 						<ul class="nav navbar-nav">
 							<li data-toggle="collapse" data-target=".navbar-collapse.in"><a href="#calculator">Calculator</a></li>
 							<li data-toggle="collapse" data-target=".navbar-collapse.in"><a href="#list">List</a></li>
-                            <li data-toggle="collapse" data-target=".navbar-collapse.in"><a href="#profile">Profile</a></li>
-                            <li data-toggle="collapse" data-target=".navbar-collapse.in"><a href="#login">Login</a></li>
+							<li data-toggle="collapse" data-target=".navbar-collapse.in"><a href="#profile">Profile</a></li>
+							<li data-toggle="collapse" data-target=".navbar-collapse.in"><a href="#login">{{user ? "Logout" : "Login" }}</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
+			
+			<div ng-if="user">Logged in as {{user.Name}}</div>
 			<div ng-view></div>
 		</div>
 	</body>
