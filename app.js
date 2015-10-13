@@ -22,6 +22,10 @@ app.config(['$routeProvider',function($routeProvider) {
 			templateUrl: 'templates/login.html',
 			controller: 'loginController'
 		})
+		.when("/logout", {
+			templateUrl: 'templates/login.html',//This isn't actually used.
+			controller:'logoutController'
+		})
 		.when('/profile',{
 			templateUrl: 'templates/profile.html',
 			controller: 'profileController'
@@ -54,7 +58,9 @@ app.factory("UserProvider", ["Auth", "$firebase", function (Auth, $firebase) {
 }]);
 app.run(function ($rootScope, UserProvider) {
 	if (UserProvider.user) {
-		UserProvider.user.$bindTo($rootScope, "user");
+		UserProvider.user.$bindTo($rootScope, "user").then(function(unbind) {
+			 $rootScope.unbindUser = unbind;
+		});;
 	}
 });
 app.controller("calculatorController", ["$scope", "$firebase","Auth", function($scope, $firebase, Auth){
@@ -121,10 +127,7 @@ app.controller('editController', ['$scope', "$firebase", '$routeParams', '$locat
 }]);
 app.controller('loginController', ["$scope", "Auth", '$rootScope', 'UserProvider', function ($scope, Auth, $rootScope, UserProvider) {
 
-	if (Auth.$getAuth()) {
-		Auth.$unauth();
-		$rootScope.user = null;
-	}
+	$scope.showLoggedIn = Auth.$getAuth() ? true : false;
 
 	$scope.CreateNewUser = function () {
 		$scope.message = null;
@@ -149,11 +152,21 @@ app.controller('loginController', ["$scope", "Auth", '$rootScope', 'UserProvider
 			password: $scope.password
 		}).then(function (authData) {
 			$scope.showLoggedIn = true;
-			UserProvider.getUser().$bindTo($rootScope, "user");
+			UserProvider.getUser()
+				.$bindTo($rootScope, "user")
+				.then(function (unbind) { $rootScope.unbindUser = unbind; });
 		}).catch(function (error) {
 			$scope.error = error;
 		});
 	}
+}]);
+app.controller('logoutController',['Auth', '$rootScope',function(Auth, $rootScope) {
+	if (Auth.$getAuth()) {
+		Auth.$unauth();
+		$rootScope.unbindUser();
+		$rootScope.user = null;
+	}
+	document.location = '/#/login';
 }]);
 app.controller('profileController', ['$scope', '$rootScope', function ($scope, $rootScope) {
 

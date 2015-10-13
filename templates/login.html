@@ -3,20 +3,20 @@
 </div>
 <div class="panel panel-info">
 	<div class="panel-body">
-		<div class="form" ng-hide="showLoggedIn">
+		<form class="form" ng-hide="showLoggedIn" >
 			<div class="form-group">
 				<strong>Login with email</strong>
 			</div>
 			<div class="form-group">
 				<label>email</label>						
-				<input class="form-control" type="text" ng-model="email"/>					
+				<input class="form-control" name="username" type="text" ng-model="email"/>					
 			</div>
 			<div class="form-group">
 				<label>password</label>						
-				<input class="form-control" type="text" ng-model="password"/>					
+				<input class="form-control" type="password" name="password" ng-model="password"/>					
 			</div>
 			<div class="form-group">
-				<button ng-click="Login()" >Login</button>
+				<input type="submit" ng-click="Login()" value="Login">
 				<button ng-click="CreateNewUser()">Create New User</button>
 			</div>
 			<div class="form-group">
@@ -24,7 +24,7 @@
 				<p ng-if="error">Error: <strong>{{ error }}</strong></p>
 			</div>
 
-		</div>
+		</form>
 		<div class="form" ng-show="showLoggedIn">
 			<div class="form-group">
 				<p><strong>You have been logged in.</strong></p>
